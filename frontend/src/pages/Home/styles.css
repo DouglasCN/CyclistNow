@@ -1,0 +1,187 @@
+#page-home {
+    height: 100vh;
+    width: 100%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#page-home #login {
+    height: 100vh;
+    width: 100%;
+    opacity: 98%;
+    background-color: #565656;
+    position: fixed;
+    z-index: 1000;
+}
+
+#page-home #login .container-login{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#page-home #login .container-login .form{
+    display: inline-grid;
+    width: 350px;
+}
+
+#page-home #login .container-login .form .button-close{
+    margin-top: 8px;
+    cursor: pointer;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #F0F0F0;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+#page-home #login .container-login .form .div-input-login{
+    border-radius: 50px;
+    margin-top: 8px;
+    height: 50px;
+    background-color: #FFF;
+    
+    padding-right: 20px;
+    display: flex;
+    align-items: center;
+}
+
+#page-home #login .container-login .form .div-input-login .input-login{
+    border: none;
+    width: 100%;
+    font-size: 16px;
+    cursor: pointer;
+    border-bottom: 1px solid black;
+    height: 65%;
+}
+
+#page-home #login .container-login .form .div-input-login .input-login:focus{
+    outline: none;
+    
+}
+
+#page-home #login .container-login .form .div-input-login span{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 55px;
+}
+
+#page-home #login .container-login .form .label-login{
+    font-weight: 700;
+    font-size: 24px;
+    margin-top: 10px;
+}
+#page-home #login .container-login .form .logo-login{
+    margin-bottom: 60px;
+    font-size: 56px;
+    color: #FFF;
+}
+
+#page-home #login .container-login .form .button-login{
+    border: none;
+    border-radius: 50px;
+    background-color: #1CB119;
+    font-size: 18px;
+    height: 40px;
+    margin-top: 8px;
+    color: #F0F0F0;
+}
+
+#page-home .content .container {
+    width: 100%;
+    height: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+
+    display: flex;
+    justify-content: space-around ;
+    align-items: center;
+}
+
+#page-home .content header h1 {
+    font-size: 64px;
+    color: #2C379E;
+}
+
+#page-home .content .container .description {
+    max-width: 500px;
+}
+
+#page-home .content .container .description button {
+    background-color: #1CB119;
+    color: #F0F0F0;
+    width: 100%;
+    max-width: 280px;
+    font-size: 16px;
+    border-radius: 8px;
+    border: none;
+    margin-top: 24px;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+#page-home .content .container .button span {
+    display: block;
+    background: rgba(0, 0, 0, 0.08);
+    width: 72px;
+    height: 48px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s;
+}
+
+#page-home .content .container .button strong {
+    width: 100%;
+    display: flex;
+    align-items: center;    
+    justify-content: center
+}
+
+#page-home .content .container .button:hover {
+    background-color: #2BCE28
+}
+
+#page-home .content .container .description h1 {
+    font-size: 50px;
+}
+
+#page-home .content .container .description p {
+    font-size: 20px;
+    margin-top: 36px;
+    color: #868686;
+}
+
+#page-home .content .container .description a {
+    color: #868686;
+    transition: background-color 0.2s;
+    cursor: pointer;
+}  
+
+#page-home .content .container .description a:hover {
+    color: #2C379E;
+} 
+
+#page-home .content .container .cycleImg {
+    width: 100%;
+    max-width: 400px;
+    z-index: 10;
+    position: relative;
+}
+
+#page-home .content .container .ShadowImg {
+    position: absolute;
+    bottom: 10%;
+    z-index: 1;
+    width: 100%;
+    max-width: 400px;
+}

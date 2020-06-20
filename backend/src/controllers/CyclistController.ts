@@ -33,10 +33,10 @@ class CyclistController{
     //create a cyclist user
     //cria um usuario ciclista
     async create(request: Request, response: Response){
-    
+        
         const {
            name,
-           email,
+           email, 
            password,
            whatsapp
         } = request.body;

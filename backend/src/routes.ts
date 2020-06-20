@@ -22,6 +22,7 @@ routes.put('/cyclist', cyclistController.update);
 
 routes.post('/meetingPoint', upload.single('image'), meetingPoint.create);
 routes.get('/meetingPoint', meetingPoint.index);
+routes.get('/meetingPoint/:id', meetingPoint.show);
 routes.put('/meetingPoint', meetingPoint.update);
 routes.delete('/meetingPoint/:id', meetingPoint.delete);
 

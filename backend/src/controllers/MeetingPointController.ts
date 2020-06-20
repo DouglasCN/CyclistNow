@@ -24,6 +24,22 @@ class MeetingPoint {
 
     }
 
+    async show(request: Request, response: Response){
+
+        const id = request.params.id;
+    
+        const point = await knex('meeting_points').where('id', id).first();
+        
+        if(!point){
+            return response.status(400).json({ message: "Point not found" });
+        }
+    
+        
+        return response.json({ logon: "success", point });
+        
+    
+    }
+
     //create a meeting point
     //cria um ponto de encontro
     async create(request: Request, response: Response){
