@@ -1,0 +1,102 @@
+#page-detail {
+    width: 100%;
+    max-width: 1100px;
+  
+    margin: 0 auto;
+}
+
+#page-detail header {
+    display: flex;
+    justify-content: space-between;
+    padding: 30px;
+}  
+
+#page-detail .section-detail {
+    margin: 25px auto;
+    padding: 64px;
+    max-width: 730px;
+    background: #FFF;
+    border-radius: 8px;
+
+    display: flex;
+    flex-direction: column;
+}
+
+#page-detail  .group-description {
+    flex: 1;
+    display: flex;
+    justify-content: space-between;
+
+}
+
+#page-detail .description {
+    
+    margin-bottom: 24px;
+}
+
+.image-detail {
+    max-height: 300px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+    outline: 0;
+}
+
+#page-detail .organized {
+    font-size: 24px;
+    font-weight: 600;
+}
+
+#page-detail .button-whatsapp {
+    background-color: #34CB79;
+    border-radius: 10px;
+    border: none;
+    height: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#page-detail .button-whatsapp span {
+    display: block;
+    width: 40px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s;
+}
+
+#page-detail .button-whatsapp strong {
+    width: 100%;
+    display: flex;
+    align-items: center;    
+    justify-content: center;
+    font-weight: 600;
+}
+
+#page-detail .button-whatsapp:hover {
+    background-color: #a7ffa6
+}
+
+#page-detail .div-button-presence {
+    display: flex;
+    justify-content: flex-end;
+}
+
+#page-detail .button-presence {
+    background-color: #34CB79;
+    border-radius: 10px;
+    border: none;
+    padding: 8px;
+    justify-content: center;
+    align-items: center;
+}
+
+.image-detail img{
+    width: 100%;
+    border-radius: 10px;
+}
+

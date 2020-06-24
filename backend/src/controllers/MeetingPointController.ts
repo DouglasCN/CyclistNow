@@ -7,9 +7,24 @@ class MeetingPoint {
     //Retorna todos os pontos de encontro filtrados pela cidade
     async index(request: Request, response: Response){
         const { city } = request.query;
+        const date = new Date();
+        const day = date.getDate();
+        const month = date.getMonth()+1;
+        const year = date.getFullYear();
+        var dia = day.toString();
+        var mes;
+
+        if(day.toString().length == 1) {
+            dia = '0'+ day;
+        }
+        if(month.toString().length == 1) {
+            mes = '0'+ month;
+        }
+        const nowdate = year + '-' + mes + '-' + dia;
 
         const meetingPoints = await knex('meeting_points')
         .where('city', String(city))
+        .andWhere('day', '>=', nowdate)
         .distinct()
         .select('*');
 
@@ -34,8 +49,7 @@ class MeetingPoint {
             return response.status(400).json({ message: "Point not found" });
         }
     
-        
-        return response.json({ logon: "success", point });
+        return response.json( point );
         
     
     }

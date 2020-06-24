@@ -2,6 +2,7 @@ import React,{ useState, useEffect, ChangeEvent } from 'react';
 import { useHistory } from 'react-router-dom';
 import { Map, TileLayer, Marker } from 'react-leaflet';
 import axios from 'axios';
+import api from '../../services/api';
 
 import "./styles.css";
 
@@ -13,16 +14,39 @@ interface IBGECityResponse{
     nome: string;
 }
 
+interface Points{
+    id: number;
+    longitude: number;
+    latitude: number;
+}
+
+interface MyPoints {
+    id: number;
+    hour: String;
+    day: Date;
+    place: String;
+}
+
 const Main = () => {
     
     const history = useHistory();
+    const cyclist_id = localStorage.getItem('user') ;
 
     const [ufs, setUfs] = useState<string[]>([]);
     const [cities, setCities] = useState<string[]>([]);
-    const [email, setEmail] = useState("");
+    const [points, setPoints] = useState<Points[]>([]);
+    const [myPoints, setMyPoints] = useState<MyPoints[]>([]);
+    const [initialPosition, setInitialPosition] = useState<[number, number]>([0,0]);
 
+    const [name, setName] = useState("");
     const [selectedUf, setSelectedUf] = useState('0'); 
     const [selectedCity, setSelectedCity] = useState('0'); 
+
+    useEffect(() => {
+        api.get(`mymeetingpoints/${cyclist_id}`).then(response => {
+           setMyPoints(response.data);
+        })
+    }, [cyclist_id]);
 
     useEffect(() => {
         if(localStorage.getItem('user') == null){
@@ -33,9 +57,17 @@ const Main = () => {
     useEffect(() => {
         const name = localStorage.getItem('name');
         if(name){
-            setEmail(name);
+            setName(name);
         }
-    },[]); 
+    },[]);
+    
+    useEffect(() => {
+        navigator.geolocation.getCurrentPosition(position => {
+            const { latitude, longitude } = position.coords;
+
+            setInitialPosition([latitude, longitude]);
+        })
+    });
 
     useEffect(() => {
         axios.get<IBGEUFResponse[]>('https://servicodados.ibge.gov.br/api/v1/localidades/estados').then(response => {
@@ -51,6 +83,14 @@ const Main = () => {
         })
     }, [selectedUf]);
 
+    useEffect(() => {
+        api.get(`meetingPoint?city=${selectedCity}`).then(response => {
+           const markedpoints = response.data;
+           setPoints(markedpoints);
+           
+        })
+    }, [selectedCity]);
+
     function handleSelectUf(event: ChangeEvent<HTMLSelectElement>){
         const uf = event.target.value
         setSelectedUf(uf);
@@ -60,26 +100,30 @@ const Main = () => {
         const city = event.target.value
         setSelectedCity(city);
     }
-
+    
     function handleLogoff(){
         localStorage.clear();
-
+        
         if(localStorage.getItem('user') == null){
             return history.push('/');
         }
     }
 
+    function handleMoreDetail(id: number){
+        console.log(id);
+    }
+
     function handleClick(id: number){
         return history.push(`/detail/${id}`);
     }
-
+    
     return (
 
         <div id="page-main">
             <header>
                 <h1>CyclistNow</h1> 
                 <li>
-                    <p>Bem vindo {email}</p>
+                    <p>Bem vindo {name}</p>
                     <ul>
                         <li>
                             <button className="button-logoff" onClick={handleLogoff}>Sair</button> 
@@ -121,12 +165,15 @@ const Main = () => {
                     </div>
                 </div>
 
-                <Map center={ [-20.0382279,-48.9303596] } zoom={15} >
+                <Map center={ initialPosition } zoom={15} >
                     <TileLayer
                         attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                     />
-                    <Marker position={ [-20.0382279,-48.9303596] }  onclick={ () => handleClick(1)} />
+                    {points.map(point => (
+                        <Marker key={point.id} position={ [ point.latitude , point.longitude] }  onclick={ () => handleClick(point.id)} />
+                    ))}  
+                    
                 </Map>      
                 <div className="button-new-point">
                     <button>Marcar novo ponto de encontro.</button>       
@@ -134,40 +181,28 @@ const Main = () => {
             </section>
             <section className="section-points">
                 <h3>Pontos de encontro que marquei presença</h3>
-                <div className="points">
-                    <div className="field">
-                        <span>Local: </span>
+                {   myPoints.map( point => (
+                    <div key={point.id} className="points">
+                        <div className="field">
+                            <span>Local: {point.place}</span>
+                        </div>
+                        <div className="field-group">
+                            <div className="field">
+                                <span>Data: {Intl.DateTimeFormat('pt-BR', { timeZone: 'UTC' , year: 'numeric', month: 'numeric', day: 'numeric'}).format( new Date(point.day))}</span> 
+                            </div>
+                            <div className="field">
+                                <span>Horario: {point.hour}</span>
+                            </div>
+                            <div className="field">
+                                <button onClick={() => handleMoreDetail(point.id)}>Ver mais informações</button>
+                            </div>
+                        </div>
                     </div>
-                    <div className="field-group">
-                        <div className="field">
-                            <span>Data: </span> 
-                        </div>
-                        <div className="field">
-                            <span>Horario: </span>
-                        </div>
-                        <div className="field">
-                            <button>Ver mais informações</button>
-                        </div>
-                    </div>
-                </div>  
+                ))}
+                  
                 <hr/>
 
-                <div className="points">
-                    <div className="field">
-                        <span>Local: </span>
-                    </div>
-                    <div className="field-group">
-                        <div className="field">
-                            <span>Data: </span> 
-                        </div>
-                        <div className="field">
-                            <span>Horario: </span>
-                        </div>
-                        <div className="field">
-                            <button>Ver mais informações</button>
-                        </div>
-                    </div>
-                </div>
+                
             </section>
         </div>
            

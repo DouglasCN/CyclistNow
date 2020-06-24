@@ -27,6 +27,7 @@ routes.put('/meetingPoint', meetingPoint.update);
 routes.delete('/meetingPoint/:id', meetingPoint.delete);
 
 routes.get('/mymeetingpoints/:id', myMeetingPoints.index);
+routes.get('/mymeetingpoints/', myMeetingPoints.show);
 routes.post('/mymeetingpoints', myMeetingPoints.create);
 routes.delete('/mymeetingpoints/:id', myMeetingPoints.delete);
 
