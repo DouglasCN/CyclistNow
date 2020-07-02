@@ -1,0 +1,62 @@
+li {
+    list-style: none;
+    text-align: right;
+    padding-top: 4px;
+    position: relative;
+    cursor: pointer;
+}
+
+li ul {
+    position: absolute;
+    right: 0;
+}
+
+ul li {
+    position: relative;
+    right: 0;
+    top: 0;
+    display: none;
+}
+
+hr {
+    margin-bottom: 5px;
+}
+
+li:hover ul li{
+    display: block;
+    
+}
+
+.header .logo {
+    color: #2C379E;
+    cursor: pointer;
+}
+
+.header .header-right{
+    display: flex;
+    align-items: flex-end;
+    font-size: 17px;
+} 
+
+.header .options-user {
+    background: #FFF;
+    border-radius: 10px;
+}
+
+.header .button-options:focus {
+   outline: none ;
+    
+}
+
+.header .button-options {
+    width: 100%;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    padding: 5px 20px 10px 20px;
+    display: grid;
+}
+
+.header .button-options:hover {
+    background: #F9F9F9;
+}

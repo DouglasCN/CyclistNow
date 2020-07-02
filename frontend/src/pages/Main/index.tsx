@@ -5,6 +5,7 @@ import axios from 'axios';
 import api from '../../services/api';
 
 import "./styles.css";
+import Header from '../../components/header';
 
 interface IBGEUFResponse{
     sigla: string;
@@ -31,14 +32,12 @@ const Main = () => {
     
     const history = useHistory();
     const cyclist_id = localStorage.getItem('user') ;
-
     const [ufs, setUfs] = useState<string[]>([]);
     const [cities, setCities] = useState<string[]>([]);
     const [points, setPoints] = useState<Points[]>([]);
     const [myPoints, setMyPoints] = useState<MyPoints[]>([]);
     const [initialPosition, setInitialPosition] = useState<[number, number]>([0,0]);
 
-    const [name, setName] = useState("");
     const [selectedUf, setSelectedUf] = useState('0'); 
     const [selectedCity, setSelectedCity] = useState('0'); 
 
@@ -53,13 +52,6 @@ const Main = () => {
             return history.push('/');
         }
     });
-
-    useEffect(() => {
-        const name = localStorage.getItem('name');
-        if(name){
-            setName(name);
-        }
-    },[]);
     
     useEffect(() => {
         navigator.geolocation.getCurrentPosition(position => {
@@ -67,7 +59,7 @@ const Main = () => {
 
             setInitialPosition([latitude, longitude]);
         })
-    });
+    },[]);
 
     useEffect(() => {
         axios.get<IBGEUFResponse[]>('https://servicodados.ibge.gov.br/api/v1/localidades/estados').then(response => {
@@ -101,16 +93,12 @@ const Main = () => {
         setSelectedCity(city);
     }
     
-    function handleLogoff(){
-        localStorage.clear();
-        
-        if(localStorage.getItem('user') == null){
-            return history.push('/');
-        }
+    function handleCreateMeetingPoint(){
+        return history.push("/create-meeting-point");
     }
 
     function handleMoreDetail(id: number){
-        console.log(id);
+        return history.push(`/detail/${id}`);
     }
 
     function handleClick(id: number){
@@ -120,23 +108,14 @@ const Main = () => {
     return (
 
         <div id="page-main">
-            <header>
-                <h1>CyclistNow</h1> 
-                <li>
-                    <p>Bem vindo {name}</p>
-                    <ul>
-                        <li>
-                            <button className="button-logoff" onClick={handleLogoff}>Sair</button> 
-                        </li>
-                    </ul>
-                </li>
-            </header>
             
+            <Header/>
+
             <section className="section-map">
-                <h3>Escolha uma cidade de interresse para exibir no mapa os pontos de encontro existentes.</h3>
+                <h3 className="text-help">Escolha uma cidade de interresse para exibir no mapa os pontos de encontro existentes.</h3>
                 <div className="field-group">
                     <div className="field">
-                        <label htmlFor="uf">Estado (UF)</label>
+                        <label htmlFor="uf" className="label-select">Estado (UF)</label>
                         <select 
                             name="uf" 
                             id="uf" 
@@ -150,7 +129,7 @@ const Main = () => {
                         </select>
                     </div>
                     <div className="field">
-                        <label htmlFor="city">Cidade</label>
+                        <label htmlFor="city" className="label-select">Cidade</label>
                         <select 
                             name="city" 
                             id="city"
@@ -164,7 +143,10 @@ const Main = () => {
                         </select>
                     </div>
                 </div>
-
+                <span className="span-help">
+                    Após escolher uma cidade, se exitir pontos cadastrados irá surgir marcadores no mapa, 
+                    para ver mais detalhadamente sobre o ponto, clique nele.
+                </span>
                 <Map center={ initialPosition } zoom={15} >
                     <TileLayer
                         attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
@@ -175,8 +157,8 @@ const Main = () => {
                     ))}  
                     
                 </Map>      
-                <div className="button-new-point">
-                    <button>Marcar novo ponto de encontro.</button>       
+                <div className="div-new-point">
+                    <button className="button-new-point" onClick={handleCreateMeetingPoint}>Marcar novo ponto de encontro</button>       
                 </div>        
             </section>
             <section className="section-points">
@@ -194,13 +176,15 @@ const Main = () => {
                                 <span>Horario: {point.hour}</span>
                             </div>
                             <div className="field">
-                                <button onClick={() => handleMoreDetail(point.id)}>Ver mais informações</button>
+                                <button className="more-informations" onClick={() => handleMoreDetail(point.id)}>Ver mais informações</button>
                             </div>
                         </div>
+                        <hr/>
                     </div>
+                     
                 ))}
                   
-                <hr/>
+               
 
                 
             </section>

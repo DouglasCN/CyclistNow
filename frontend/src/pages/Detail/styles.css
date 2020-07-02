@@ -5,6 +5,12 @@
     margin: 0 auto;
 }
 
+#page-detail .back{
+    align-items: center; 
+    display: flex;
+    cursor: pointer;
+}
+
 #page-detail header {
     display: flex;
     justify-content: space-between;
@@ -30,7 +36,7 @@
 }
 
 #page-detail .description {
-    
+    display: flex;
     margin-bottom: 24px;
 }
 
@@ -93,6 +99,7 @@
     padding: 8px;
     justify-content: center;
     align-items: center;
+    cursor: pointer;
 }
 
 .image-detail img{
@@ -100,3 +107,7 @@
     border-radius: 10px;
 }
 
+#page-detail .button-presence:focus {
+    outline: none ;
+     
+ }

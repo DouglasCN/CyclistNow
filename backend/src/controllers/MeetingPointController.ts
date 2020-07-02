@@ -31,7 +31,7 @@ class MeetingPoint {
         const serializedMeetingPoints = meetingPoints.map( point => {
             return {
                 ...point,
-                image_url: `http://{ipDaRede}/uploads/${point.image}`,
+                image_url: `http://localhost:3333/uploads/${point.image}`,
             };
         });
 
@@ -48,8 +48,13 @@ class MeetingPoint {
         if(!point){
             return response.status(400).json({ message: "Point not found" });
         }
+
+        const serializedPoint = {
+            ...point,
+            image_url: `http://localhost:3333/uploads/${point.image}`,
+        };
     
-        return response.json( point );
+        return response.json( serializedPoint );
         
     
     }

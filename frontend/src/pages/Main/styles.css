@@ -1,29 +1,4 @@
-li {
-    list-style: none;
-    text-align: right;
-    padding-top: 4px;
-    position: relative;
-}
 
-li ul {
-    position: absolute;
-    right: 0;
-}
-
-ul li {
-    position: relative;
-    right: 0;
-    top: 0;
-    display: none;
-}
-
-.button-logoff {
-    width: 80px;
-}
-
-li:hover ul li{
-    display: block;
-}
 
 #page-main {
     width: 100%;
@@ -40,7 +15,7 @@ li:hover ul li{
 
 #page-main .section-map {
     margin: 25px auto;
-    padding: 64px;
+    padding: 34px 64px 24px 64px;
     max-width: 730px;
     background: #FFF;
     border-radius: 8px;
@@ -62,6 +37,27 @@ li:hover ul li{
     margin-bottom: 24px;
 }
 
+#page-main .section-map .span-help {
+    color: #a1a1a1;
+    text-align: justify;
+    margin-bottom: 8px;
+}
+
+#page-main .section-map .text-help {
+    margin-bottom: 8px;
+    text-align: justify;
+}
+
+#page-main .section-map #uf,
+#page-main .section-map #city {
+    border-radius: 10px;
+    padding: 3px;
+}
+
+#page-main .section-map .label-select {
+    padding-left: 2px;
+}
+
 #page-main  .field-group  .field + .field {
     margin-left: 24px;
 }
@@ -72,10 +68,24 @@ li:hover ul li{
     border-radius: 8px; 
 }
 
-#page-main .section-map .button-new-point {
+#page-main .section-map .div-new-point {
     padding-top: 20px;
     display: flex;
     justify-content: flex-end;
+}
+
+#page-main .section-map .button-new-point {
+    border: none;
+    background-color: #1CB119;
+    color: #FFF;
+    border-radius: 10px;
+    cursor: pointer;
+    padding: 3px 5px ;
+}
+
+#page-main .section-map .button-new-point:hover {
+    background-color: #1CB119AA;
+    
 }
 
 #page-main .section-points {
@@ -92,4 +102,25 @@ li:hover ul li{
 
 #page-main .section-points .points{ 
     padding-top: 20px;
+}
+
+#page-main .more-informations {
+    border: none;
+    background-color: #2C379EEE;
+    color: #FFF;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+#page-main .more-informations:hover {
+    background-color: #2C379EAA;
+    
+}
+
+#page-main .more-informations:focus,
+#page-main .section-map .button-new-point,
+#page-main .section-map #uf,
+#page-main .section-map #city {
+   outline: none;
+    
 }

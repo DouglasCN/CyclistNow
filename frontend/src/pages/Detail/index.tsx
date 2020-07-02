@@ -5,8 +5,9 @@ import { FaWhatsapp } from 'react-icons/fa';
 import api from '../../services/api';
 
 import './styles.css'; 
+import Header from '../../components/header';
 
-interface Data{
+interface Point{
     
     image: string;
     organizes: string;
@@ -19,6 +20,7 @@ interface Data{
     latitude: string;
     city: string;
     uf: string;
+    image_url: string
     
 }
 
@@ -29,11 +31,9 @@ const Detail = ( ) => {
     const cyclist_id = localStorage.getItem('user') ;
     const meeting_point_id = id;
 
-    const [data, setData]  = useState<Data>({} as Data);
+    const [data, setData]  = useState<Point>({} as Point);
     const [markedPresence, setMarkedPresence] = useState();
-    const name = localStorage.getItem('name');
     
-
     useEffect(() => {
         if(localStorage.getItem('user') == null){
             return history.push('/');
@@ -41,9 +41,8 @@ const Detail = ( ) => {
     });
 
     useEffect(() => {
-        api.get<Data>(`meetingPoint/${id}`).then(response => {
+        api.get<Point>(`meetingPoint/${id}`).then(response => {
             setData(response.data);
-            
         })
     },[id]);
 
@@ -53,12 +52,8 @@ const Detail = ( ) => {
         })
     });
 
-    function handleLogoff(){
-        localStorage.clear();
-
-        if(localStorage.getItem('user') == null){
-            return history.push('/');
-        }
+    function goBack(){
+        history.goBack();
     }
         
     async function handleSubmitMarkedPresence(event: FormEvent){
@@ -93,20 +88,14 @@ const Detail = ( ) => {
             console.log(status)
         }
     }
+    
+    const split = String(data.day).split('-');
 
     return (
-        <div id="page-detail">   
-            <header>
-                <h1>CyclistNow</h1> 
-                <li>
-                    <p>Bem vindo {name}</p>
-                    <ul>
-                        <li>
-                            <button className="button-logoff" onClick={handleLogoff}>Sair</button> 
-                        </li>
-                    </ul>
-                </li>
-            </header>
+        <div id="page-detail">  
+
+            <Header/>
+
             <section className="section-detail">
                 <div className="detail">
                     <div className="group-description">
@@ -114,26 +103,29 @@ const Detail = ( ) => {
                             <span className="organized">Organizado por {data.organizes}</span>
                         </div>
                         <div className="description">
+                            <span className="back" onClick={goBack}>Voltar</span>
+                        </div>
+                    </div>
+                    <div className="group-description">
+                        <div className="description">
+                            <span>Dia da pedalada: {split[2]+"/"+split[1]+"/"+split[0]}</span>
+                        </div>
+                        <div className="description">
+                            <span>Sairemos às: {data.hour}</span>
+                        </div>
+                        <div className="description">
                             <button className="button-whatsapp">
                                    <strong>
                                    Mensagem
-                                       </strong>  
+                                    </strong>  
                                 <span>
                                     <FaWhatsapp/>
                                 </span>
                             </button>
                         </div>
                     </div>
-                    <div className="group-description">
-                        <div className="description">
-                            <span>Dia da pedalada: {data.day}</span>
-                        </div>
-                        <div className="description">
-                            <span>Sairemos às: {data.hour}</span>
-                        </div>
-                    </div>
                     <div className="image-detail">
-                        <img src="http://192.168.100.13:3333/uploads/cidade.jpg" alt="Place"/>
+                        <img src={data.image_url} alt="Place"/>
                     </div>
                     <div className="group-description">
                         <div className="description">
