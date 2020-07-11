@@ -159,10 +159,10 @@ const CreateMeetingPoint = ( ) => {
                         <span className="h2">Cadastro de ponto de encontro</span>
                         <span className="back" onClick={goBack}>Voltar</span>
                     </div>
-                    
+                    <span className="span"> Clique na área verde ou arraste uma imagem até o local para fazer o upload da imagem do local.</span>
                     <Dropzone onFileUploaded={setSelectedFile} />  
 
-                    <span>Dados</span>
+                    <span className="title2">Dados</span>
 
                     <div className="field-group">
                         <div className="field">

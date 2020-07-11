@@ -137,6 +137,11 @@ const Detail = ( ) => {
                             <span>Sera feito cerca de {data.distance} kilometros nessa pedalada. </span>
                         </div>
                     </div>
+                    <div className="group-description">
+                        <div className="description">
+                            <span>14 pessoas marcaram presença nessa pedelada.</span>
+                        </div>
+                    </div>
                     {
                         markedPresence === true ?(
                             <form className="div-button-presence" onSubmit={handleSubmitDeselectPresence}>
