@@ -6,6 +6,7 @@ import CreateUser from './pages/CreateUser';
 import Main from './pages/Main';
 import Detail from './pages/Detail';
 import CreateMeetingPoint from './pages/CreateMeetingPoint';
+import Perfil from './pages/Perfil';
 
 const Routes = () => {
     return (
@@ -13,8 +14,10 @@ const Routes = () => {
             <Route component={Home} path="/" exact/>
             <Route component={CreateUser} path="/create-user" exact/>
             <Route component={Main} path="/main" exact/>
+            <Route component={Perfil} path="/perfil" exact/>
             <Route component={Detail} path="/detail/:id" exact/>
             <Route component={CreateMeetingPoint} path="/create-meeting-point" exact/>
+            
         </BrowserRouter>
     );
 }

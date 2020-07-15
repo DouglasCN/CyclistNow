@@ -1,0 +1,41 @@
+#page-perfil {
+    height: 100vh;
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+#page-perfil header{
+    display: flex;
+    justify-content: space-between;
+    padding: 30px;
+}
+
+#page-perfil .container{
+    margin: 25px auto;
+    padding: 18px 18px 18px 18px;
+    max-width: 930px;
+    background: #FFF;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.info{
+    height: 400px;
+    width: 29.5%;
+    background-color: #424242;
+    border-radius: 8px;
+}
+
+.att{
+    height: 400px;
+    width: 69.5%;
+    background-color: #A9A9A9;
+    border-radius: 8px; 
+    display: block;
+}
+
+
+
+
