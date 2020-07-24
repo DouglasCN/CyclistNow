@@ -51,6 +51,9 @@ const Home = () => {
         if(cyclist.data.logon === "success"){
             localStorage.setItem('user', cyclist.data.cyclist.id);
             localStorage.setItem('name', cyclist.data.cyclist.name);
+            localStorage.setItem('email', cyclist.data.cyclist.email);
+            localStorage.setItem('whatsapp', cyclist.data.cyclist.whatsapp);
+
             history.push("/main");
         }
     }

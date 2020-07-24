@@ -5,13 +5,13 @@
     margin: 0 auto;
 }
 
-#page-perfil header{
+#page-perfil header {
     display: flex;
     justify-content: space-between;
     padding: 30px;
 }
 
-#page-perfil .container{
+#page-perfil .container {
     margin: 25px auto;
     padding: 18px 18px 18px 18px;
     max-width: 930px;
@@ -21,21 +21,147 @@
     justify-content: space-between;
 }
 
-.info{
+#page-perfil .initial {
+    height: 400px;width: 69.5%;
+    /* background-color: #A9A9A9; */
+    border-radius: 8px;
+    padding: 20px;
+    display: grid;
+    position: relative
+}
+
+#page-perfil .initial .shadowImg {
+    position: absolute;
+    opacity: 60%;
+    width: 45%;
+    z-index: 1;
+    top: 20%;
+    right: 0%;
+}
+#page-perfil .initial .shadowImg1 {
+    position: absolute;
+    opacity: 100%;
+    width: 45%;
+    z-index: 1;
+    top: 28%;
+    right: 51%;
+}
+#page-perfil .initial .shadowImg2 {
+    position: absolute;
+    opacity: 40%;
+    width: 45%;
+    z-index: 1;
+    top: 10%;
+    right: 39%;
+}
+
+#page-perfil .info {
     height: 400px;
     width: 29.5%;
     background-color: #424242;
     border-radius: 8px;
+    padding: 20px;
+    color: white;
+    display: grid;
 }
 
-.att{
+#page-perfil .info .buttons {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 30px;
+}
+
+#page-perfil .info .buttons button {
+    border-radius: 20px;
+    border: none;
+    margin: 2px;
+}
+
+#page-perfil .info .buttons .button-upgrade-data,
+#page-perfil .info .buttons .button-upgrade-passw{
+    background-color: blue;
+    cursor: pointer;
+    height: 28px;
+}
+
+#page-perfil .info .buttons .button-upgrade-passw{
+    margin-bottom: 16px;
+}
+
+#page-perfil .info .buttons .button-delete {
+    background-color: red;
+    height: 28px;
+} 
+
+#page-perfil .upgrade {
     height: 400px;
     width: 69.5%;
     background-color: #A9A9A9;
     border-radius: 8px; 
     display: block;
+    padding: 20px;
+}
+
+#page-perfil .upgrade form {
+    margin-top: 18px;
+}
+
+#page-perfil .upgrade input {
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 50px;
+    margin-top: 8px;
+    height: 24px;
+    background-color: #FFF;
+    padding: 0 10px;
+}
+
+#page-perfil .upgrade form .field-group {
+    flex: 1;
+    display: flex;
+}
+
+#page-perfil .upgrade form .field {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 24px;
+}
+
+#page-perfil .upgrade form .field-label{
+    font-size: 16px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-weight: 400;
+}
+
+#page-perfil .upgrade .field-group  .field + .field {
+    margin-left: 24px;
+}
+
+#page-perfil .upgrade form .field-button{
+    justify-content: flex-end;
+    align-items: flex-end;
+}
+
+#page-perfil .upgrade form button {
+    border-radius: 20px;
+    border: none;
+    background-color: green;
+    width: 100px;
+    height: 24px;
 }
 
 
+#page-perfil .info .buttons .button-upgrade-data,
+#page-perfil .info .buttons .button-upgrade-passw,
+#page-perfil .upgrade input,
+#page-perfil .upgrade form button,
+#page-perfil .info .buttons .button-delete:focus {
+    outline: none;
+}
 
-
+#data{
+    display: none !important;
+}

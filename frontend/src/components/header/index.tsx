@@ -1,6 +1,6 @@
 import React from 'react';
 import { FiChevronDown } from "react-icons/fi";
-import { useHistory } from 'react-router-dom';
+import { useHistory, Link } from 'react-router-dom';
 
 import './styles.css';
 
@@ -31,7 +31,7 @@ const Header = () => {
                 <ul>
                     <li className="options-user">
                         <button className="button-options" onClick={handleLogoff}>Sair</button> 
-                        <button className="button-options">Editar usuário</button> 
+                        <button className="button-options"><Link to="/perfil">Editar usuário</Link></button> 
                     </li>
                 </ul>
             </li>
