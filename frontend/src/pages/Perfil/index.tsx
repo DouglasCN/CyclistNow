@@ -1,11 +1,21 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, ChangeEvent, FormEvent } from 'react';
 import { useHistory } from "react-router-dom";
+import api from '../../services/api';
 
 import logo from '../../assets/cycle.png';
 import './styles.css';
 import Header from '../../components/header';
 
 const Perfil = () => {
+
+    const [newPassword, setNewPassword] = useState('');
+    const [data, setData] = useState({
+        name: '',
+        whatsapp: '',
+        email: '',
+        password: '',
+    })
+
     const [stylesData, setStylesData] = useState("none");
     const [stylesPassword, setStylesPassword] = useState("none");
     const [stylesInitial, setStylesInitial] = useState("block");
@@ -34,6 +44,44 @@ const Perfil = () => {
         setStylesInitial("none");
     }
 
+    function handleInputChange(event: ChangeEvent<HTMLInputElement>){
+        const {name, value} = event.target;
+
+        setData({...data, [name]: value});
+    }
+    function handleNewPassword(event: ChangeEvent<HTMLInputElement>){
+        setNewPassword(event.target.value);
+        
+    }
+
+    async function handleSubmit(event: FormEvent){
+        event.preventDefault();
+        const { name, email, whatsapp, password} = data;
+        const id = cyclist_id;
+        const newPassword = password;
+        console.log(data)
+        const newdata ={
+            id,
+            name,
+            email,
+            whatsapp,
+            currentPassword: password,
+            newPassword
+        }
+        
+        const status = await api.put('cyclist', newdata);
+
+        if(status){
+            // alert('ponto de coleta criado');
+            // history.push('/');
+            console.log(status)
+        }else {
+            console.log(status)
+        }
+        
+    }
+
+
     return (
         <div id="page-perfil">
             <Header/>
@@ -61,7 +109,7 @@ const Perfil = () => {
 
                 <div className="upgrade" style={{ display: stylesData }} >
                     <h3>Caso queira atualizar algum dado cadastrado erradamente, basta escrever nos campos e comfirmar sua senha de login.</h3>
-                    <form>
+                    <form onSubmit={handleSubmit}>
                         <div className="field-group">
                             <div className="field">
                                 <label htmlFor="name" className="field-label">Nome:</label>
@@ -69,7 +117,8 @@ const Perfil = () => {
                                     type="text"
                                     id="name"
                                     name="name"
-                                    //onChange={handleInputChange}
+                                    onChange={handleInputChange}
+                                    required
                                 />
                             </div>
                             <div className="field">
@@ -78,7 +127,7 @@ const Perfil = () => {
                                     type="text"
                                     id="whatsapp"
                                     name="whatsapp"
-                                    //onChange={handleInputChange}
+                                    onChange={handleInputChange}
                                 />
                             </div>
                         </div>
@@ -88,7 +137,7 @@ const Perfil = () => {
                             <input type="email" 
                                 id="email"
                                 name="email"
-                                //onChange={handleInputChange}
+                                onChange={handleInputChange}
                             />
                         </div>
 
@@ -99,11 +148,12 @@ const Perfil = () => {
                                     type="password"
                                     id="password"
                                     name="password"
-                                    //onChange={handleInputChange}
+                                    onChange={handleInputChange}
+                                    
                                 />
                             </div>
                             <div className="field field-button">
-                                <button>Salvar</button>
+                                <button type="submit">Salvar</button>
                             </div>
                         </div>
                     </form>
